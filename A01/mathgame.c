@@ -11,8 +11,8 @@
 int main() {
 	int rounds;
 	int firstNum;
-        int secondNum;
-        int answer;
+  int secondNum;
+  int answer;
 	int input;
 	int count = 0;
 	printf("Welcome to Math Game!\nHow many rounds do you want to play?\n");
