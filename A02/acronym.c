@@ -22,7 +22,6 @@ int main() {
 void acronym(char p[]) {
   char acro[512];
   int count = 0;
-  int len = strlen(p);
   for (int i = 0; p[i] != '\0'; i++) {
     if (p[i] >= 'A' && p[i] <= 'Z') {
       acro[count] = p[i];
