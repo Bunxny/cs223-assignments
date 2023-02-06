@@ -1,6 +1,6 @@
 /**
 *
-*A program that computes an acronym from a given phrase.
+* A program that computes an acronym from a given phrase.
 *
 * @author: Anna Nguyen
 * @version: February 1, 2023

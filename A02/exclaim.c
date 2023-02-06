@@ -1,8 +1,8 @@
 /**
 *
-*This program turns a word into an exclaimation looping through each
-*character. If the character is a lowercase letter, it is replaced with
-*a randomly choosen character {'@', '!', '#', '*'}.
+* This program turns a word into an exclaimation looping through each
+* character. If the character is a lowercase letter, it is replaced with
+* a randomly choosen character {'@', '!', '#', '*'}.
 *
 * @author: Anna Nguyen
 * @version: February 1, 2023
