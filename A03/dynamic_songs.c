@@ -74,7 +74,7 @@ int main() {
         data[i].title, data[i].artist, data[i].min, data[i].sec,
           data[i].danceability);
     }
-    printf("energy: %-20.3f tempo: %-20.3f valence: %-20.3f",
+    printf("energy: %-16.3f tempo: %-21.3f valence: %-20.3f",
       data[i].energy, data[i].tempo, data[i].valence);
     printf("\n=======================\n");
   }
