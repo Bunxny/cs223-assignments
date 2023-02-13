@@ -31,13 +31,13 @@ int main() {
   char *token;
   char *delim = ",";
   char line[2046];
-  strcpy(line, fgets(line, 128, infile));
+  fgets(line, 2046, infile);
   token = strtok(line, delim);
   int len = atoi(token);
   struct song* data = malloc(sizeof(struct song) * len);
-  strcpy(line, fgets(line, 128, infile));
+  fgets(line, 2046, infile);
   for (int i = 0; i < len; i++) {
-    strcpy(line, fgets(line, 128, infile));
+    fgets(line, 2046, infile);
     token = strtok(line, delim);
     int count = 0;
     struct song songs;
