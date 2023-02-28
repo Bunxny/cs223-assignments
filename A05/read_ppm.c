@@ -21,7 +21,6 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   infile = fopen(filename, "rb");
   if (infile == NULL) {
     printf("Error: unable to open file %s\n", "infile");
-    fclose(infile);
     return NULL;
   }
 
@@ -33,7 +32,6 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   }
   if (header[0] != 'P' || header[1] != '6') {
     printf("Please make sure the PPM is of type P6");
-    fclose(infile);
     return NULL;
   }
 
@@ -49,7 +47,6 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   //Get the size w.h
   if (!fscanf(infile, "%d %d", w, h)) {
     printf("unexpected error for width and height\n");
-    fclose(infile);
     return NULL;
   }
 
@@ -59,7 +56,6 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   fgets(header, sizeof(header), infile);
   if (!fgets(header, sizeof(header), infile)) {
     printf("unexpected error for byte size\n");
-    fclose(infile);
     return NULL;
   }
   strcpy(maxByte, header);
@@ -67,7 +63,6 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   arrayC = malloc(sizeof(struct ppm_pixel) * (size));
   if (arrayC == NULL) {
     printf("Bad malloc error\n");
-    fclose(infile);
     return NULL;
   }
 
