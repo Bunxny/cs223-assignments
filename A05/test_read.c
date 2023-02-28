@@ -17,7 +17,7 @@ int main() {
   for (int i = 0; i < h; i++) { //row
     for (int j = 0; j < w; j++) { //colunm
       printf("(%d,%d,%d) ",
-      pixels[(i * w) + j].red, pixels[(i * w) + j].green, pixels[(i * w) + j].blue);
+       pixels[(i * w) + j].red, pixels[(i * w) + j].green, pixels[(i * w) + j].blue);
     }
     printf("\n");
   }
