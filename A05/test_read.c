@@ -10,7 +10,7 @@
 int main() {
   int w, h;
   char *filename = "feep-raw.ppm";
-  struct ppm_pixel* pixels = read_ppm("feep-raw.ppm", &w, &h);
+  struct ppm_pixel *pixels = read_ppm("feep-raw.ppm", &w, &h);
 
   // todo: print out the grid of pixels
   printf("Testing file %s: %d %d\n", filename, w, h);
