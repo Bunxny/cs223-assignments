@@ -25,7 +25,7 @@ void write_ppm(const char *filename, struct ppm_pixel *pixels, int w, int h) {
   //magic number
   fprintf(outfile, "P6\n");
   //the comment
-  fprintf(outfile, "# Created by GIMP version 2.10.24 PNM plug-in\n");
+  fprintf(outfile, "# Created by Anna Nguyen version 2.10.24 PNM plug-in\n");
   //Get the size w.h
   fprintf(outfile, "%d %d\n", w, h);
   //get max byte
