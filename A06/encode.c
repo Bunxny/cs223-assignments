@@ -14,7 +14,7 @@
 void encode_color(struct ppm_pixel *c, char *phrase, int len) {
   int count = 0;
   unsigned char *color = (unsigned char*) c;
-  for (int i = 0; i < len - 1; i++) {
+  for (int i = 0; i < len; i++) {
     //get each char of msg/phrase
     unsigned char ch_of_msg = phrase[i];
     for (int j = 0; j < 8; j++) {
