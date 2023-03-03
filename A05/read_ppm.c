@@ -21,14 +21,16 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   infile = fopen(filename, "rb");
   if (infile == NULL) {
     printf("Error: unable to open file %s\n", "infile");
+    fclose(infile);
     return NULL;
   }
 
-  char header[1256];
+  char header[1250];
   struct ppm_pixel *arrayC;
   //read in header first get magic number
-  if (!fgets(header, sizeof(header), infile)) {
+  if (!fgets(header, 1257, infile)) {
     printf("unexpected error\n");
+    return NULL;
   }
   if (header[0] != 'P' || header[1] != '6') {
     printf("Please make sure the PPM is of type P6");
@@ -40,7 +42,7 @@ struct ppm_pixel *read_ppm(const char *filename, int *w, int *h) {
   char comment;
   comment = getc(infile);
   if (comment == '#') {
-    while (getc(infile) != '\n') {
+    while (comment != '\n') {
       comment = getc(infile);
     }
   }
