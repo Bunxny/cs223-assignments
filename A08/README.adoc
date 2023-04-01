@@ -1,10 +1,11 @@
 = Hardware specifications
 
 Where did your run your tests? A laptop, or goldengate?
-
+goldengate
 What are the performance specifications of the machine: number and speed of
 processors, size of RAM? (use `lscpu` and `free -m`)
-
+2 processors and speed of 4000.132MHz
+RAM size: 95315
 = Single-process mandelbrot
 
 Run your executable, `single_mandelbrot`, with the following sizes and record
@@ -13,10 +14,10 @@ the amount of time it takes to compute each image.
 [cols="1,1"]
 !===
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
+| 100 | 0.016377
+| 400 | 0.277300
+| 800 | 1.108669
+| 1000 |  1.717841 
 | 2000 | todo
 !===
 
@@ -28,9 +29,9 @@ the amount of time it takes to compute each image.
 [cols="1,1"]
 !===
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
-| 2000 | todo
+| 100 | 0.000443
+| 400 | 0.000933
+| 800 | 0.002687
+| 1000 | 0.004005 
+| 2000 | 0.014890
 !===

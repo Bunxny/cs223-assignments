@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
   char title[120];
   sprintf(title, "mandelbrot-%d-%ld.ppm", size, time(0));
   write_ppm(title, image, size, size);
-  printf("Computed mandelbrot set (480x480) in %f seconds\n", timer);
+  printf("Computed mandelbrot set (%dx%d) in %f seconds\n", size, size, timer);
   printf("Writing file: %s\n", title);
   free(pallet);
   free(image);
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 
 void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ymax,
  int MAX, struct ppm_pixel *pallet, struct ppm_pixel  *image) {
-  int row, col, iter;
+  int row, col, i;
   double xfrac, yfrac, x0, y0, x, y, xtmp;
   struct ppm_pixel color;
   for (row = 0; row < image_size; row++) {
@@ -83,7 +83,7 @@ void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ym
       y0 = ymin + yfrac * (ymax - ymin);
       x = 0;
       y = 0;
-      int i = 0;
+      i = 0;
       while (i < MAX && x*x + y*y < 2*2) {
         xtmp = x*x - y*y + x0;
         y = 2*x*y + y0;
