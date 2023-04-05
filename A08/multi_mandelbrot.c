@@ -53,6 +53,10 @@ int main(int argc, char* argv[]) {
     perror("Error: cannot initialize shared memory\n");
     exit(1);
   }
+  if (shmid2 == -1) {
+    perror("Error: cannot initialize shared memory\n");
+    exit(1);
+  }
   //attach shared memory to parent process
   struct ppm_pixel *image = (struct ppm_pixel*)shmat(shmid, NULL, 0);
   if (image == (void*) -1) {
@@ -61,6 +65,10 @@ int main(int argc, char* argv[]) {
   }
   //pallet varable
   struct ppm_pixel *pallet = (struct ppm_pixel*)shmat(shmid2, NULL, 0);
+  if (pallet == (void*) -1) {
+    perror("Error: cannot access shared memory\n");
+    exit(1);
+  }
   // generate pallet
   srand(time(0)); //seed
   int r, g, b;
