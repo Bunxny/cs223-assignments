@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+int *list;
+int len;
+int find;
+int n;
+
+void *finder(void *d);
+
+int main(int argc, char** argv) {
+  if (argc < 2) {
+    printf("usage: %s <NumThreads>\n", argv[0]);
+    exit(0);
+  }
+  FILE* fp = fopen("data.bin", "rb");
+  fread(&len, sizeof(int), 1, fp);
+  int *list = malloc(sizeof(int) * len);
+  fread(list, sizeof(int), len, fp);
+  printf("Enter a value to search: ");
+  scanf(" %d", &find);
+  //create threads
+  n = atoi(argv[1]); //n threads
+  pthread_t *th = (pthread_t *)malloc(sizeof(pthread_t) * n);
+  pthread_t *thread_ids = malloc(n * sizeof(int));
+  //pthread_t *thread_ids;
+  for (int i = 0; i < atoi(argv[1]); i++) {
+    if (pthread_create(&th[i], NULL, finder, (void *)&thread_ids[i]) != 0) {
+      perror("Create Thread Failed");
+      exit(1);
+   }
+  }
+  for (int i = 0; i < atoi(argv[1]); i++) {
+    if (pthread_join(th[i], NULL) != 0) {
+      perror("Thread Join Failed");
+      exit(1);
+    }
+  }
+  free(thread_ids); //free?????
+  free(th);
+  free(list);
+  fclose(fp);
+  return 0;
+}
+//put data into a struct hard code it in and put it into the thread create void &
+void *finder(void *d) {
+  int id = *(int*)d;
+  int start = id * (len / n);
+  int end = (id + 1) * (len / n);
+  int count = 0;
+  for (int i = start; i <= end; i++) {
+    if (list[count] == find) {
+      printf("Thread %d found %d at index %d\n", id, find, i);
+      exit(0);
+    } //else {
+      //printf("Not Found!");
+      //exit(0);
+    //}
+    count++;
+  }
+
+  return 0;
+}
