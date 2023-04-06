@@ -191,6 +191,7 @@ void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ym
       y0 = ymin + yfrac * (ymax - ymin);
       x = 0;
       y = 0;
+      i = 0;
       while (i < MAX && x*x + y*y < 2*2) {
         xtmp = x*x - y*y + x0;
         y = 2*x*y + y0;
