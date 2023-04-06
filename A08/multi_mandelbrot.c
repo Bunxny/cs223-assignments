@@ -53,6 +53,10 @@ int main(int argc, char* argv[]) {
     perror("Error: cannot initialize shared memory\n");
     exit(1);
   }
+  if (shmid2 == -1) {
+    perror("Error: cannot initialize shared memory\n");
+    exit(1);
+  }
   //attach shared memory to parent process
   struct ppm_pixel *image = (struct ppm_pixel*)shmat(shmid, NULL, 0);
   if (image == (void*) -1) {
@@ -61,6 +65,10 @@ int main(int argc, char* argv[]) {
   }
   //pallet varable
   struct ppm_pixel *pallet = (struct ppm_pixel*)shmat(shmid2, NULL, 0);
+  if (pallet == (void*) -1) {
+    perror("Error: cannot access shared memory\n");
+    exit(1);
+  }
   // generate pallet
   srand(time(0)); //seed
   int r, g, b;
@@ -144,7 +152,7 @@ int main(int argc, char* argv[]) {
   timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
   char title[120];
   sprintf(title, "mandelbrot-%d-%ld.ppm", size, time(0));
-  write_ppm("t.ppm", image, size, size);
+  write_ppm(title, image, size, size);
   printf("Computed mandelbrot set (%dx%d) in %f seconds\n", size, size, timer);
   printf("Writing file: %s\n", title);
   //detach and free
