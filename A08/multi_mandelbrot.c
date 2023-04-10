@@ -199,11 +199,11 @@ void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ym
         i++;
       }
       if (i < MAX) {// escaped
-      color = pallet[i];
+        color = pallet[i];
       } else {
-      color.red = 0; //black
-      color.green = 0;
-      color.blue = 0;
+        color.red = 0; //black
+        color.green = 0;
+        color.blue = 0;
       }
       //write color to image at location (row,col)
       image[row*image_size+col] = color;
