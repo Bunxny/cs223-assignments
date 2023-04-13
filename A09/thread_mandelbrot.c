@@ -88,10 +88,6 @@ int main(int argc, char* argv[]) {
   gettimeofday(&tstart, NULL);
   pthread_t th[4];
   struct data *data = malloc(sizeof(struct data) * 4);
-  int start_row;
-  int start_col;
-  int end_row;
-  int end_col;
   for (int i = 0; i < 4; i++) {
     data[i].id = i;
     data[i].size = size;
@@ -174,11 +170,11 @@ void * mandelbrot(void *d) {
         i++;
       }
       if (i < data->maxIterations) {// escaped
-      color = pallet[i];
+        color = pallet[i];
       } else {
-      color.red = 0; //black
-      color.green = 0;
-      color.blue = 0;
+        color.red = 0; //black
+        color.green = 0;
+        color.blue = 0;
       }
       //write color to image at location (row,col)
       image[row * data->size + col] = color;

@@ -191,6 +191,7 @@ void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ym
       y0 = ymin + yfrac * (ymax - ymin);
       x = 0;
       y = 0;
+      i = 0;
       while (i < MAX && x*x + y*y < 2*2) {
         xtmp = x*x - y*y + x0;
         y = 2*x*y + y0;
@@ -198,11 +199,11 @@ void mandelbrot(int image_size, double xmin, double xmax, double ymin, double ym
         i++;
       }
       if (i < MAX) {// escaped
-      color = pallet[i];
+        color = pallet[i];
       } else {
-      color.red = 0; //black
-      color.green = 0;
-      color.blue = 0;
+        color.red = 0; //black
+        color.green = 0;
+        color.blue = 0;
       }
       //write color to image at location (row,col)
       image[row*image_size+col] = color;
