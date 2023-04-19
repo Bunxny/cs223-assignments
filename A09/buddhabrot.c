@@ -1,3 +1,9 @@
+/*----------------------------------------------
+ * Author:Anna Nguyen
+ * Date:April 10, 2023
+ * Description:a program that outputs a PPM image
+  of the Buddhabrot set using threads.
+ ---------------------------------------------*/
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
