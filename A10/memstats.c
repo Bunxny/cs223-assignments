@@ -1,3 +1,9 @@
+/*----------------------------------------------
+ * Author:Anna Nguyen
+ * Date:April 19, 2023
+ * Description:an implementataion of the function memstat
+  that displays memory and block information.
+ ---------------------------------------------*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -17,6 +23,41 @@ struct chunk {
 };
 
 void memstats(struct chunk* freelist, void* buffer[], int len) {
+  int total_blocks_used = 0;
+  int total_blocks_free = 0;
+  size_t total_memory_allocated = 0;
+  size_t total_memory_used = 0;
+  size_t total_used = 0;
+
+  // count blocks and memory
+  for (int i = 0; i < len; i++) {
+    if (buffer[i] != NULL) {
+      struct chunk* cnk = (struct chunk*)((struct chunk*)buffer[i] - 1);
+      total_memory_allocated = total_memory_allocated + cnk->size;
+      total_memory_used = total_memory_used + cnk->size;
+      total_used = total_used + cnk->used;
+      total_blocks_used++;
+    }
+  }
+
+  // free blocks
+  struct chunk* curr = freelist;
+  while (curr != NULL) {
+    total_blocks_free++;
+    total_memory_allocated = total_memory_allocated + curr->size;
+    curr = curr->next;
+  }
+
+  size_t underutilized_memory = total_memory_allocated - total_used - (total_memory_allocated - total_memory_used);
+  printf("%ld", total_used);
+  printf("\nTotal blocks: %d", total_blocks_used + total_blocks_free);
+  printf("  Used blocks: %d", total_blocks_used);
+  printf("  Free blocks: %d", total_blocks_free);
+  printf("\nTotal memory allocated: %zu bytes", total_memory_allocated);
+  printf("  Used memory: %zu bytes", total_memory_used);
+  printf("  Free memory: %zu bytes", total_memory_allocated - total_memory_used);
+  printf("\nUnderutilised memory: %.2f\n",
+   (double)underutilized_memory / (double)total_memory_used);
 }
 
 int main ( int argc, char* argv[]) {
@@ -34,7 +75,6 @@ int main ( int argc, char* argv[]) {
   for (int i = 0; i < BUFFER; i++) {
     buffer[i] = NULL;
   }
-
   void *init = sbrk(0);
   void *current;
   printf("The initial top of the heap is %p.\n", init);
@@ -47,16 +87,16 @@ int main ( int argc, char* argv[]) {
         free(buffer[index]);
         buffer[index] = NULL;
         printf("Freeing index %d\n", index);
-      } 
+      }
       else {
-        size_t size = (size_t) randExp(8, 4000); 
+        size_t size = (size_t) randExp(8, 4000);
         int *memory = NULL;
         memory = malloc(size);
 
         if (memory == NULL) {
           fprintf(stderr, "malloc failed\n");
           return(1);
-        } 
+        }
         *memory = 123;
         buffer[index] = memory;
         printf("Allocating %d bytes at index %d\n", (int) size, index);
@@ -73,7 +113,7 @@ int main ( int argc, char* argv[]) {
   }
 
   for (int i = 0; i < BUFFER; i++) {
-    free(buffer[i]); 
+    free(buffer[i]);
   }
   gettimeofday(&tend, NULL);
   timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
